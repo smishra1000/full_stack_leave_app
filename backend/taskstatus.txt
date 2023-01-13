@@ -1,0 +1,15 @@
+
+1>create project structure--- done
+2>frontend/backend---done
+
+
+3>login signup------done
+4>routes for login and signup----inprogess
+
+5>backend routes,model,schema,signup and login function---done
+6>jwt token implementaion for login --done
+6> user dashbaord--inprogress---protected routes implementaion ---done
+
+7>user dashaboard with header -----done
+8>apply leave functionality/ ----pending
+9>leave model,leave schma,leae routes---pending
