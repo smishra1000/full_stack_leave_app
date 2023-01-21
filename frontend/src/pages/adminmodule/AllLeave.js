@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react"
-import UserHeader from "./UserHeader"
+import AdminHeader from "./AdminHeader"
 
-const MyLeave = () => {
+const AllLeave = () => {
     const [leaves, setLeaves] = useState([])
     const [username, setUserName] = useState("")
 
     useEffect(() => {
-        let loggedInUser = localStorage.getItem("loggedInUser");
-        loggedInUser = loggedInUser ? JSON.parse(loggedInUser) : null;
-        setUserName(loggedInUser.email)
+        // let loggedInUser = localStorage.getItem("loggedInUser");
+        // loggedInUser = loggedInUser ? JSON.parse(loggedInUser) : null;
+        // setUserName(loggedInUser.email)
     }, [])
 
-    useEffect(() => {
-        let loggedInUser = localStorage.getItem("loggedInUser");
-        loggedInUser = loggedInUser ? JSON.parse(loggedInUser) : null;
-        fetch(`http://localhost:5000/userleave/${loggedInUser.email}/myleave`)
+    const getAllLeave = () => {
+        fetch(`http://localhost:5000/userleave/allleave`)
             .then(function (res) {
                 return res.json()
             }).then(function (result) {
@@ -22,10 +20,30 @@ const MyLeave = () => {
                 setLeaves(result)
 
             })
+    }
+
+    useEffect(() => {
+        getAllLeave();
     }, [])
+
+    const approveRejectLeave = (e, leave, status) => {
+        e.preventDefault();
+        fetch(`http://localhost:5000/userleave/${leave._id}/approvereject`,
+            {
+                method: "PUT", body: JSON.stringify({ status: status }),
+                headers: { 'Content-Type': "application/json" }
+            })
+            .then(function (res) {
+                return res.json()
+            }).then(function (result) {
+                getAllLeave()
+
+            })
+    }
     return (
         <div>
-            <UserHeader />
+            <AdminHeader />
+            <br/>
             <table className="table">
                 <thead>
                     <tr>
@@ -35,6 +53,7 @@ const MyLeave = () => {
                         <th scope="col">Status</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,13 +63,11 @@ const MyLeave = () => {
                                 <td>{leave.username}</td>
                                 <td>{leave.leaveType}</td>
                                 <td>{leave.reason}</td>
-                                <td>
-                                    {leave.status === "approved" && <span class="badge bg-success">{leave.status}</span>}
-                                    {leave.status === "pending" && <span class="badge bg-secondary">{leave.status}</span>}
-                                    {leave.status === "rejected" && <span class="badge bg-info text-dark">{leave.status}</span>}
-                                </td>
+                                <td>{leave.status}</td>
                                 <td>{leave.startDate}</td>
                                 <td>{leave.endDate}</td>
+                                {leave.status !== "approved" && <td><button type="button" class="btn btn-primary" onClick={(e) => approveRejectLeave(e, leave, "approved")}>Approve</button>
+                                    <button type="button" class="btn btn-danger" onClick={(e) => approveRejectLeave(e, leave, "rejected")}>Reject</button></td>}
                             </tr>
                         )
                     })}
@@ -61,4 +78,4 @@ const MyLeave = () => {
     )
 }
 
-export default MyLeave
+export default AllLeave

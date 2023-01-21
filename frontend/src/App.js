@@ -7,6 +7,10 @@ import UserDashboard from './pages/usermodule/UserDashboard';
 import ProtectedRoutes from './pages/ProtectedRoutes';
 import MyLeave from './pages/usermodule/MyLeave';
 import ApplyLeave from "./pages/usermodule/ApplyLeave"
+import AdminDashboard from "./pages/adminmodule/AdminDashboard"
+import AllLeave from './pages/adminmodule/AllLeave';
+import AllUsers from './pages/adminmodule/AllUsers';
+import Balance from './pages/usermodule/Balance';
 
 
 function App() {
@@ -34,7 +38,14 @@ function App() {
             <MyLeave/>
           </ProtectedRoutes>}>
         </Route>
+        <Route path="/balance" element={<ProtectedRoutes path="/">
+            <Balance/>
+          </ProtectedRoutes>}>
+        </Route>
         <Route path="/login" element={<Login/>}></Route>
+        <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/allleave" element={<AllLeave/>}></Route>
+        <Route path="/allusers" element={<AllUsers/>}></Route>
       </Routes>
       </BrowserRouter>
 

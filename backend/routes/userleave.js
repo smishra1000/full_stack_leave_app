@@ -1,5 +1,6 @@
 const express = require("express");
 const UserLeave = require("../models/userleave")
+const User = require("../models/user")
 const router = express.Router()
 
 router.post("/apply", function (req, res) {
@@ -28,6 +29,37 @@ router.get("/:username/myleave", function (req, res) {
             res.send(leaves)
         } else {
             res.status(500).send("some thing went wrong while fetching leaves")
+        }
+    })
+
+})
+
+router.get("/allleave", function (req, res) {
+    UserLeave.find().then(function (leaves) {
+        if (leaves) {
+            res.send(leaves)
+        } else {
+            res.status(500).send("some thing went wrong while fetching leaves")
+        }
+    })
+
+})
+
+router.put("/:leaveId/approvereject", function (req, res) {
+    UserLeave.findByIdAndUpdate(req.params.leaveId,{status:req.body.status},).then(function (leave) {
+        if (leave) {
+            const difference = new Date(leave.endDate)  - new Date(leave.startDate)
+            const days = difference/(1000*60*60*24)
+            console.log(days,leave)
+            User.findOneAndUpdate({email:leave.username},{approvedLeaveCount:Number(days)},function(err,result){
+                if(err){
+                    return res.send(err)
+                }else {
+                    res.send(result)
+                }
+            })
+        } else {
+            res.status(500).send("some thing went wrong while approving leave")
         }
     })
 

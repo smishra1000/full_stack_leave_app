@@ -11,5 +11,13 @@
 6> user dashbaord--inprogress---protected routes implementaion ---done
 
 7>user dashaboard with header -----done
-8>apply leave functionality/ ----pending
-9>leave model,leave schma,leae routes---pending
+8>apply leave functionality/ ----done
+9>leave model,leave schma,leave routes---done---
+10>admin module---done
+11 admin can approve the leave ----done
+12>creation of admin ----pending
+13>on signup we 'll add role for each user, restriction of duplicate email, -----pending
+14>leave count --15 leave --done
+15> update the leave count on approve ,display the remaining balance ----pending
+16>Notification---
+17--
