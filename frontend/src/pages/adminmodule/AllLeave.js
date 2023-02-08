@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import AdminHeader from "./AdminHeader"
+import axios from 'axios';
 
 const AllLeave = () => {
     const [leaves, setLeaves] = useState([])
@@ -12,13 +13,18 @@ const AllLeave = () => {
     }, [])
 
     const getAllLeave = () => {
-        fetch(`http://localhost:5000/userleave/allleave`)
-            .then(function (res) {
-                return res.json()
-            }).then(function (result) {
-                console.log("result", result)
-                setLeaves(result)
+        // fetch(`http://localhost:5000/userleave/allleave`)
+        //     .then(function (res) {
+        //         return res.json()
+        //     }).then(function (result) {
+        //         console.log("result", result)
+        //         setLeaves(result)
 
+        //     })
+        axios.get(`http://localhost:5000/userleave/allleave`)
+            .then(res => {
+                const leaves = res.data;
+                setLeaves(leaves)
             })
     }
 
@@ -43,7 +49,7 @@ const AllLeave = () => {
     return (
         <div>
             <AdminHeader />
-            <br/>
+            <br />
             <table className="table">
                 <thead>
                     <tr>

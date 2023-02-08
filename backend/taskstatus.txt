@@ -15,9 +15,45 @@
 9>leave model,leave schma,leave routes---done---
 10>admin module---done
 11 admin can approve the leave ----done
-12>creation of admin ----pending
-13>on signup we 'll add role for each user, restriction of duplicate email, -----pending
+12>creation of admin ----done with script
+13>on signup we 'll add role for each user, restriction of duplicate email, -----done
 14>leave count --15 leave --done
-15> update the leave count on approve ,display the remaining balance ----pending
-16>Notification---
+15> update the leave count on approve ,display the remaining balance ----done
+
+16>Notification------ expalin the functionality----You gyus will complete
 17--
+
+
+1.Create model for notification 
+
+cretae new routes for notification --get delete
+
+
+ui 
+
+creta enew component called Notification
+    diplay the notification a list itm\
+
+    {
+        id:
+        text 
+        read:false//true
+        createdDate:
+        sataus
+        active:
+    }
+
+
+New functionality--
+1. leave type as dropdown-- sick,regualr vacation,CL,paid leave,
+2. remain leave balance related logic,
+3. you can create admin signup page you have pass role as an admin---
+    create checkbox with role as an admin or user then pass those role to backend
+4.        
+
+
+
+
+start reading like designe pattern ---
+
+        

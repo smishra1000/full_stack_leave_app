@@ -43,7 +43,9 @@ function App() {
           </ProtectedRoutes>}>
         </Route>
         <Route path="/login" element={<Login/>}></Route>
-        <Route path="/admindashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/admindashboard" element={<ProtectedRoutes path="/">
+            <AdminDashboard/>
+          </ProtectedRoutes>}></Route>
         <Route path="/allleave" element={<AllLeave/>}></Route>
         <Route path="/allusers" element={<AllUsers/>}></Route>
       </Routes>

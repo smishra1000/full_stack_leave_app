@@ -7,8 +7,13 @@ import {
     NavItem,
     NavbarText,
 } from 'reactstrap';
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 function AdminHeader(){
+    const navigate = useNavigate();
+    const logout=()=>{
+        localStorage.clear();
+        navigate("/login")
+    }
     return(
         <Navbar style={{"background":"cadetblue"}}>
                 <NavbarBrand href="/">LeaveApp</NavbarBrand>
@@ -20,7 +25,7 @@ function AdminHeader(){
                             <Link to="/allusers">All Users</Link>
                         </NavItem>
                     </Nav>
-                    <NavbarText>Logout</NavbarText>
+                    <NavbarText onClick={logout}>Logout</NavbarText>
 
             </Navbar>
     )
